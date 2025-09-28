@@ -69,8 +69,8 @@ def main():
                 convert_dir(Path(ford))
         else:
             print(f'ERROR: {Path(ford)} does not exist')
+            parser.print_help()
             sys.exit(1)
-
 
 
 if __name__ == '__main__':
