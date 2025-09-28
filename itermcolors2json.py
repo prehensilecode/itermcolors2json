@@ -37,6 +37,14 @@ def convert_dir(dirname):
     if _DEBUG:
         print(f'DEBUG: convert_file: dirname = {dirname}')
 
+    colorsfns = sorted(dirname.glob('*.itermcolors'))
+
+    if _DEBUG:
+        print(f'DEBUG: convert_dir: colorsfns = {colorsfns}')
+
+    for fn in colorsfns:
+        convert_file(fn)
+
 
 def main():
     global _DEBUG
