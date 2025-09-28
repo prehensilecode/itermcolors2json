@@ -6,15 +6,36 @@ import json
 import argparse
 from pathlib import Path
 
-_DEBUG = True
+_DEBUG = False
 
 
 def convert_file(filename):
-    pass
+    global _DEBUG
+
+    if _DEBUG:
+        print(f'DEBUG: convert_file: filename = {filename}')
+
+    bn = os.path.splitext(filename)[0]
+
+    if _DEBUG:
+        print(f'DEBUG: convert_file: bn = {bn}')
+
+    with open(filename, 'rb') as f:
+        profile = plistlib.load(f, fmt=plistlib.FMT_XML)
+
+    jsonfn = ''.join([bn, '.json'])
+    if _DEBUG:
+        print(f'DEBUG: convert_file: jsonfn = {jsonfn}')
+
+    with open(''.join([bn, '.json']), 'w') as f:
+        json.dump(profile, f, indent=4)
 
 
 def convert_dir(dirname):
-    pass
+    global _DEBUG
+
+    if _DEBUG:
+        print(f'DEBUG: convert_file: dirname = {dirname}')
 
 
 def main():
@@ -34,14 +55,14 @@ def main():
     for ford in args.file_or_dir:
         if Path(ford).exists():
             print(Path(ford))
-            print(Path(ford).is_file())
-            print(Path(ford).is_dir())
+            if Path(ford).is_file():
+                convert_file(Path(ford))
+            elif Path(ford).is_dir():
+                convert_dir(Path(ford))
+        else:
+            print(f'ERROR: {Path(ford)} does not exist')
+            sys.exit(1)
 
-    with open('Neopolitan.itermcolors', 'rb') as f:
-        foobar = plistlib.load(f, fmt=plistlib.FMT_XML)
-
-    with open('Foobar.json', 'w') as f:
-        json.dump(foobar, f, indent=4)
 
 
 if __name__ == '__main__':
