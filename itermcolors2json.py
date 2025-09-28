@@ -62,7 +62,9 @@ def main():
 
     for ford in args.file_or_dir:
         if Path(ford).exists():
-            print(Path(ford))
+            if _DEBUG:
+                print(Path(ford))
+
             if Path(ford).is_file():
                 convert_file(Path(ford))
             elif Path(ford).is_dir():
