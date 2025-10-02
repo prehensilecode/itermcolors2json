@@ -27,7 +27,7 @@ def convert_file(filename):
     if _DEBUG:
         print(f'DEBUG: convert_file: jsonfn = {jsonfn}')
 
-    with open(''.join([bn, '.json']), 'w') as f:
+    with open(jsonfn, 'w') as f:
         json.dump(profile, f, indent=4)
 
 
