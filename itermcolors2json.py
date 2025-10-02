@@ -51,7 +51,7 @@ def main():
     parser = argparse.ArgumentParser(prog='itermcolors2json.py',
                                      description='Convert itermcolors file to JSON')
     parser.add_argument('-d', '--debug', action='store_true', help='debugging output')
-    parser.add_argument('file_or_dir', nargs='*')
+    parser.add_argument('file_or_dir', nargs='*', help="file or directory")
     args = parser.parse_args()
 
     _DEBUG = args.debug
